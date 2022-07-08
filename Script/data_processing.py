@@ -83,6 +83,3 @@ def scan(path=ph.get_raw_data()):
     list = [mach, vf, flutter]
     return np.array(list).T
 
-
-if __name__=='__main__':
-    scan()
