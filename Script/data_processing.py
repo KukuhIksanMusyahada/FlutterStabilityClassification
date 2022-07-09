@@ -74,7 +74,6 @@ def scan(path=ph.get_raw_data()):
                 result = extract_mach_and_vf(file)
                 mach.append(result[0])
                 vf.append(result[1])
-                print(file)
                 df = read_df(os.path.join(dir_path, file))
                 grad= gradien(df)
                 turn_point = find_turn_point(grad)
