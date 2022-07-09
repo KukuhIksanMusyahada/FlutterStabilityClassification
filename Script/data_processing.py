@@ -3,6 +3,7 @@ import re
 import numpy as np
 import pandas as pd
 
+from sklearn.model_selection import train_test_split
 
 from Script import path_handler as ph
 
@@ -82,3 +83,7 @@ def scan(path=ph.get_raw_data()):
     list = [mach, vf, flutter]
     return np.array(list).T
 
+def train_val_split(X,y, train_ratio = .7):
+    X_train, X_val, y_train, y_val = train_test_split(X,y, train_size= train_ratio, shuffle= True)
+
+    return X_train, X_val, y_train, y_val
