@@ -12,6 +12,8 @@ def get_raw_data():
 def get_processed_data():
     return os.path.join(get_data_source(), 'Processed_Data')
 
+def get_models_data():
+    return os.path.join(get_data_source(), 'Models_Data')
 
 
 
