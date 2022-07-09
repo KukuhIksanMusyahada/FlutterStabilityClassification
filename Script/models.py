@@ -11,7 +11,7 @@ from keras.layers import Dense
 from Script import path_handler as ph
 
 
-def model(X, y, max_epoch):
+def model(X_train, X_val, y_train, y_val, max_epoch= 300):
     model = Sequential([
         Dense(300, activation='relu', input_dim = 2),
         Dense(100, activation='relu'),
@@ -20,7 +20,8 @@ def model(X, y, max_epoch):
     ])
     model.compile(loss='binary_crossentropy', optimizer='adam')
 
-    history = model.fit(X,y, epochs= max_epoch, verbose=0)
+    history = model.fit(X_train,y_train, epochs= max_epoch, 
+                        validation_data=(X_val, y_val),verbose=0)
 
     return model, history
 
