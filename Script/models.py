@@ -40,7 +40,7 @@ def savemodel(model, history, optional_path: str=None):
     print ("\nModel saved to {}".format(model_directory))
 
     with open(history_file, 'wb') as f:
-        pickle.dump(history, f)
+        pickle.dump(history.history, f)
     print ("Model history saved to {}".format(history_file))
 
 
