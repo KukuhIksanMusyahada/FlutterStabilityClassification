@@ -1,9 +1,14 @@
+import os
 import numpy as np
+import datetime
+import pickle
 
 import tensorflow as tf
 
 from keras.models import Sequential
 from keras.layers import Dense
+
+from Script import path_handler as ph
 
 
 def model(X, y, max_epoch):
@@ -15,15 +20,14 @@ def model(X, y, max_epoch):
     ])
     model.compile(loss='binary_crossentropy', optimizer='adam')
 
-    model.fit(X,y, epochs= max_epoch, verbose=0)
+    history = model.fit(X,y, epochs= max_epoch, verbose=0)
 
-    return model
+    return model, history
 
-def SaveModel(model, history, optional_path: str=None):
+def savemodel(model, history, optional_path: str=None):
     """Save both model and history"""
-    now = datetime.datetime.now()
-    time_now = now.strftime('%Y%m%d%H%M%S')
-    folder_name = "ANN " + time_now
+    nomor_model = str(len(os.listdir(ph.get_models_data()))+1)
+    folder_name = "ModelFlutterClassification" + nomor_model
     if optional_path != None:
         model_directory = os.path.join (optional_path, folder_name)
     else:
@@ -40,7 +44,7 @@ def SaveModel(model, history, optional_path: str=None):
     print ("Model history saved to {}".format(history_file))
 
 
-def LoadModel(path_to_model):
+def loadmodel(path_to_model):
     """Load Model and optionally it's history as well"""
     history_file = os.path.join(path_to_model, 'history.pkl')
     model = tf.keras.models.load_model(path_to_model)
