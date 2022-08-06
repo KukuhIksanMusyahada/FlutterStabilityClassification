@@ -12,9 +12,9 @@ from Script import path_handler as ph
 
 def read_df(path):
     try:
-        df = pd.read_csv(path, usecols=['plunge(airfoil)']).to_numpy()
+        df = pd.read_csv(path, usecols=['plunge(airfoil)'], engine='python').to_numpy()
     except ValueError:
-        df = pd.read_csv(path, usecols=['plunge_airfoil']).to_numpy()
+        df = pd.read_csv(path, usecols=['plunge_airfoil'], engine='python').to_numpy()
 
     return df
 
@@ -81,7 +81,14 @@ def scan(path=ph.get_raw_data()):
                 divergen = divergence_test(df, turn_point)
                 flutter.append(divergen)
     list = [mach, vf, flutter]
+    save_processed_data(list)
     return np.array(list).T
+
+def save_processed_data(list, path=ph.get_processed_data(),names='classification_data.csv'):
+    df = pd.DataFrame(np.array(list).T)
+    datapath = os.path.join(path, names)
+    df.to_csv(datapath)
+
 
 def train_val_split(X,y, train_ratio = .7):
     X_train, X_val, y_train, y_val = train_test_split(X,y, train_size= train_ratio, shuffle= True)
