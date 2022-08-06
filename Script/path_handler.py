@@ -15,5 +15,11 @@ def get_processed_data():
 def get_models_data():
     return os.path.join(get_data_source(), 'Models_Data')
 
+def get_results_data():
+    path = os.path.join(get_data_source(), 'Results_Data')
+    if os.path.isdir(path) == False:
+        os.makedirs(path)
+    return path
+
 
 
