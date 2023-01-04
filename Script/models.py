@@ -18,7 +18,7 @@ def model(X_train, X_val, y_train, y_val, max_epoch= 300):
         Dense(50, activation='relu'),
         Dense(1, activation='sigmoid')
     ])
-    model.compile(loss='binary_crossentropy', optimizer='adam')
+    model.compile(loss='binary_crossentropy', optimizer='adam',metrics=['Accuracy'])
 
     history = model.fit(X_train,y_train, epochs= max_epoch, 
                         validation_data=(X_val, y_val),verbose=0)
